@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OXO Premium Logo Animation</title>
+    <style>
+        /* --- TEMA VE DEĞİŞKENLER --- */
+        :root {
+            --bg-color: transparent; /* Varsayılan: Tamamen şeffaf */
+            --logo-color: #ffffff;
+            --animation-speed: 3s;
+        }
+
+        /* Tüm temalar şeffaf arka planlı */
+        body.theme-black { --bg-color: transparent; }
+        body.theme-transparent { --bg-color: transparent; }
+        body.theme-green { --bg-color: transparent; }
+
+        * {
+            box-sizing: border-box; /* Hata düzeltildi! */
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: sans-serif;
+            transition: background-color 0.4s ease;
+        }
+
+        /* --- LOGO ALANI --- */
+        .oxo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px; /* Harfler arası boşluk */
+            user-select: none;
+        }
+
+        /* O Harfleri */
+        .char-o {
+            width: 120px;
+            height: 120px;
+            border: 16px solid var(--logo-color);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            flex-shrink: 0;
+        }
+
+        /* X Harfi Konteyner */
+        .char-x {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+        }
+
+        /* Bağımsız X Çubukları */
+        .bar {
+            position: absolute;
+            top: 0;
+            left: 52px; /* Ortalamak için (120px / 2 - 16px / 2) */
+            width: 16px;
+            height: 120px;
+            background-color: var(--logo-color);
+            border-radius: 8px;
+            transform-origin: center;
+            will-change: transform;
+        }
+
+        /* Birinci Çubuk: Sağ Yatık (\) ve Sonsuz Kayma Hareketi */
+        .bar-1 {
+            transform: rotate(-45deg);
+            animation: infiniteSlideOne var(--animation-speed) cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        /* İkinci Çubuk: Sol Yatık (/) ve Sonsuz Kayma Hareketi */
+        .bar-2 {
+            transform: rotate(45deg);
+            animation: infiniteSlideTwo var(--animation-speed) cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        /* --- ANIMASYONLAR (∞ Sonsuzluk Hissi) --- */
+        @keyframes infiniteSlideOne {
+            0%, 100% {
+                transform: rotate(-45deg) translateY(-30px);
+            }
+            50% {
+                transform: rotate(-45deg) translateY(30px);
+            }
+        }
+
+        @keyframes infiniteSlideTwo {
+            0%, 100% {
+                transform: rotate(45deg) translateY(30px);
+            }
+            50% {
+                transform: rotate(45deg) translateY(-30px);
+            }
+        }
+
+        /* --- HIZLI TEMA DEĞİŞTİRİCİ BUTONLAR --- */
+        .theme-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+
+        .theme-switcher:hover {
+            opacity: 1;
+        }
+
+        .theme-btn {
+            padding: 8px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .theme-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        /* --- KURULUM KONTROLLERİ --- */
+        .setup-controls {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            z-index: 20;
+        }
+
+        .setup-option {
+            color: #fff;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .setup-option input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .setup-btn {
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 170px;
+        }
+
+        .setup-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .setup-btn.secondary {
+            border-color: rgba(255, 255, 255, 0.4);
+            background: transparent;
+        }
+
+        .setup-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="theme-transparent">
+
+    <div class="theme-switcher">
+        <button class="theme-btn" onclick="changeTheme('black')">Siyah</button>
+        <button class="theme-btn" onclick="changeTheme('green')">Yeşil (Chroma)</button>
+        <button class="theme-btn" onclick="changeTheme('transparent')">Şeffaf</button>
+    </div>
+
+    <div class="oxo-container">
+        <div class="char-o"></div>
+        <div class="char-x">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+        </div>
+        <div class="char-o"></div>
+    </div>
+
+    <div class="setup-controls">
+        <label class="setup-option">
+            <input type="checkbox" id="masaustu-kisayol" checked>
+            <span>Masaüstüne kısayol ekle</span>
+        </label>
+        <button id="yukle-btn" class="setup-btn">YÜKLE</button>
+        <button id="iptal-btn" class="setup-btn secondary">İPTAL</button>
+    </div>
+
+    <script>
+        function changeTheme(themeName) {
+            document.body.className = '';
+            document.body.classList.add('theme-' + themeName);
+        }
+
+        try {
+            const { ipcRenderer } = require('electron');
+            document.getElementById('yukle-btn').addEventListener('click', () => {
+                const masaustuKisayol = document.getElementById('masaustu-kisayol').checked;
+                document.getElementById('yukle-btn').disabled = true;
+                document.getElementById('yukle-btn').textContent = 'YÜKLENİYOR...';
+                ipcRenderer.send('kurulum-baslat', { masaustuKisayol });
+            });
+            document.getElementById('iptal-btn').addEventListener('click', () => {
+                ipcRenderer.send('kurulum-iptal');
+            });
+        } catch (e) {
+            console.warn('Electron IPC kullanılamadı:', e);
+        }
+    </script>
+</body>
+</html>

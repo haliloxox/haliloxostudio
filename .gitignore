@@ -1,0 +1,6 @@
+# Ignore all files except setup wizard
+*
+!.gitignore
+!README.md
+!kurulumsihirbazı animasyonu/
+!kurulumsihirbazı animasyonu/**

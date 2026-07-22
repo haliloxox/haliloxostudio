@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HalilOXO - Ultra Smooth Intro</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: transparent;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* Pürüzsüz yazı işleme ayarları */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* Ekstra Kalın ve Kusursuz Yumuşaklıkta Karşılama Metni */
+        .studio-welcome {
+            font-size: 36px;
+            letter-spacing: 8px;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.5;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 
+                         0 0 40px rgba(255, 255, 255, 0.4);
+            
+            /* Titreşimi engelleyen ekran kartı (GPU) tetikleyicileri */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            will-change: transform, opacity, filter;
+            
+            /* Yağ gibi akan sinematik animasyon */
+            animation: smoothIntro 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes smoothIntro {
+            0% {
+                opacity: 0;
+                /* Aşırı küçük ölçeklemeden kaçınarak titreşimi önlüyoruz */
+                transform: scale(0.6) translate3d(0, 0, 0);
+                filter: blur(12px);
+                letter-spacing: 20px;
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translate3d(0, 0, 0);
+                filter: blur(0);
+                letter-spacing: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="studio-welcome">
+        haliloxo live studio'ya<br>hoşgeldiniz
+    </div>
+
+</body>
+</html>
